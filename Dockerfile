@@ -47,8 +47,8 @@ USER root
 # 下载MCL
 RUN dnf -y update && dnf -y install unzip wget && dnf clean all && \
 		mkdir /root/MCL && \
-    	cd /root/MCL && \
-        wget  https://github.com/iTXTech/mirai-console-loader/releases/download/v${MCL_VERSION}/mcl-${MCL_VERSION}.zip  && \
+    		cd /root/MCL && \
+		wget  https://github.com/iTXTech/mirai-console-loader/releases/download/v${MCL_VERSION}/mcl-${MCL_VERSION}.zip  && \
 		unzip mcl-${MCL_VERSION}.zip && \
 		rm mcl-${MCL_VERSION}.zip && \
 		wget 这里是你机器人配置文件的地址 &&\
@@ -58,9 +58,11 @@ RUN dnf -y update && dnf -y install unzip wget && dnf clean all && \
 		chmod +x mcl &&\
 		chmod +x mcl.jar &&\
 		./mcl --update-package org.itxtech:mcl-addon &&\
-        ./mcl --update-package org.itxtech:soyuz &&\
-        ./mcl --update-package net.mamoe:chat-command --type plugin --channel stable
+		./mcl --update-package org.itxtech:soyuz &&\
+		./mcl --update-package net.mamoe:chat-command --type plugin --channel stable
 
-RUN java -jar ./root/MCL/mcl.jar
+RUN cd root/MCL &&\
+	timeout 8m java -jar /root/MCL/mcl.jar &&\
+	java -jar /root/MCL/mcl.jar
 
 CMD java -jar ./root/MCL/mcl.jar
