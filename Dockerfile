@@ -43,6 +43,8 @@ WORKDIR .
 # 复制机器人信息，以免登录
 COPY bots /root/MCL/bots
 COPY plugins /root/MCL/plugins
+COPY config /root/MCL/config
+COPY data /data/MCL/data
 
 RUN dnf -y update && dnf -y install unzip wget && dnf clean all && \
         cd /root/MCL && \
@@ -50,4 +52,6 @@ RUN dnf -y update && dnf -y install unzip wget && dnf clean all && \
         unzip mcl-2.1.2.zip && \
         chmod +x mcl &&\
         ./mcl --update-package org.itxtech:mcl-addon &&\
-        ./mcl --update-package org.itxtech:soyuz
+        ./mcl --update-package org.itxtech:soyuz &&\
+        ./mcl --update-package net.mamoe:chat-command --type plugin --channel stable &&\
+	./mcl &
