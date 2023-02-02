@@ -44,7 +44,8 @@ WORKDIR .
 COPY bots /root/MCL/bots
 COPY plugins /root/MCL/plugins
 COPY config /root/MCL/config
-COPY data /data/MCL/data
+COPY config.json /root/MCL/config.json
+COPY data /root/MCL/data
 
 RUN dnf -y update && dnf -y install unzip wget && dnf clean all && \
         cd /root/MCL && \
@@ -54,4 +55,4 @@ RUN dnf -y update && dnf -y install unzip wget && dnf clean all && \
         ./mcl --update-package org.itxtech:mcl-addon &&\
         ./mcl --update-package org.itxtech:soyuz &&\
         ./mcl --update-package net.mamoe:chat-command --type plugin --channel stable &&\
-	./mcl
+	./mcl 
