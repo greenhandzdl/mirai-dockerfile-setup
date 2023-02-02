@@ -49,17 +49,23 @@ COPY config /root/MCL/config
 COPY config.json /root/MCL/config.json
 COPY data /root/MCL/data
 
+# 下载MCL
 RUN dnf -y update && dnf -y install unzip wget && dnf clean all && \
         cd /root/MCL && \
         wget https://github.com/iTXTech/mirai-console-loader/releases/download/v2.1.2/mcl-2.1.2.zip && \
         unzip mcl-2.1.2.zip && \
         chmod +x mcl &&\
-        ./mcl --update-package org.itxtech:mcl-addon &&\
+		./mcl --update-package org.itxtech:mcl-addon &&\
         ./mcl --update-package org.itxtech:soyuz &&\
         ./mcl --update-package net.mamoe:chat-command --type plugin --channel stable &&\
-	chkconfig --add /root/MCL/mcl &&\
-	chkconfig /root/MCL/mcl on &&\
-	./mcl 
 
-ENTRYPOINT ["mcl"]
-CMD [/root/MCL/mcl]
+#开机自启动(似乎entrypoint就带这个功能)
+# RUN echo "#!/bin/bash" > /etc/init.d/mcl && \
+# 		echo "#chkconfig: 2345 80 90" >> /etc/init.d/mcl &&\
+# 		echo "#description:auto_run" >> /etc/init.d/mcl &&\
+# 		echo "cd /root/MCL/ && ./mcl &" >> /etc/init.d/mcl &&\
+# 		cat /etc/init.d/mcl &&\
+# 		chkconfig --add mcl &&\
+# 		chkconfig  mcl on
+
+ENTRYPOINT ["cd","/root/MCL","&&","./mcl"]
