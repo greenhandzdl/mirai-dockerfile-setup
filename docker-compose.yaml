@@ -15,4 +15,4 @@ services:
         cpu: 1000m
         memory: 3Gi
     volumes:
-      - .:/root
+      - .:/root/MCL
