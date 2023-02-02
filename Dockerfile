@@ -49,4 +49,5 @@ RUN dnf -y update && dnf -y install unzip wget && dnf clean all && \
         wget https://github.com/iTXTech/mirai-console-loader/releases/download/v2.1.2/mcl-2.1.2.zip && \
         unzip mcl-2.1.2.zip && \
         chmod +x mcl &&\
-        bash mcl
+        ./mcl --update-package org.itxtech:mcl-addon &&\
+        ./mcl --update-package org.itxtech:soyuz
