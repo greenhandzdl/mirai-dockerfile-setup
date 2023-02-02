@@ -12,7 +12,7 @@ services:
       test: echo $(ps -a)
     resources:
       requests:
-        cpu: 3000m
+        cpu: 1000m
         memory: 3Gi
     volumes:
       - .:/root
