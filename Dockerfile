@@ -49,14 +49,22 @@ COPY config /root/MCL/config
 COPY config.json /root/MCL/config.json
 COPY data /root/MCL/data
 
+ENV MCL_VERSION=2.1.2
+
+USER root
+
 # 下载MCL
 RUN dnf -y update && dnf -y install unzip wget && dnf clean all && \
         cd /root/MCL && \
-        wget https://github.com/iTXTech/mirai-console-loader/releases/download/v2.1.2/mcl-2.1.2.zip && \
-        unzip mcl-2.1.2.zip && \
-        chmod +x mcl &&\
+        wget  https://github.com/iTXTech/mirai-console-loader/releases/download/v${MCL_VERSION}/mcl-${MCL_VERSION}.zip  && \
+		unzip mcl-${MCL_VERSION}.zip && \
+		rm mcl-${MCL_VERSION}.zip && \
+		chmod 777 . &&\
+		chmod +x mcl &&\
+		sed -i "2 i cd /root/MCL" mcl &&\
 		./mcl --update-package org.itxtech:mcl-addon &&\
         ./mcl --update-package org.itxtech:soyuz &&\
-        ./mcl --update-package net.mamoe:chat-command --type plugin --channel stable &&\
+        ./mcl --update-package net.mamoe:chat-command --type plugin --channel stable
 
-ENTRYPOINT ["cd /root/MCL && ./mcl"]
+
+ENTRYPOINT ["/root/MCL/mcl"]
