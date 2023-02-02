@@ -42,6 +42,7 @@ RUN set -eux; \
 
 # DockerFile目录下需要包含机器人文件
 WORKDIR .
+VOLUME /root/MCL
 # 复制机器人信息，以免登录
 COPY bots /root/MCL/bots
 COPY plugins /root/MCL/plugins
@@ -66,5 +67,4 @@ RUN dnf -y update && dnf -y install unzip wget && dnf clean all && \
         ./mcl --update-package org.itxtech:soyuz &&\
         ./mcl --update-package net.mamoe:chat-command --type plugin --channel stable
 
-
-CMD ["/bin/bash","/root/MCL/mcl"]
+CMD ./mcl
