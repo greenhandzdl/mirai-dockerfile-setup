@@ -59,13 +59,4 @@ RUN dnf -y update && dnf -y install unzip wget && dnf clean all && \
         ./mcl --update-package org.itxtech:soyuz &&\
         ./mcl --update-package net.mamoe:chat-command --type plugin --channel stable &&\
 
-#开机自启动(似乎entrypoint就带这个功能)
-# RUN echo "#!/bin/bash" > /etc/init.d/mcl && \
-# 		echo "#chkconfig: 2345 80 90" >> /etc/init.d/mcl &&\
-# 		echo "#description:auto_run" >> /etc/init.d/mcl &&\
-# 		echo "cd /root/MCL/ && ./mcl &" >> /etc/init.d/mcl &&\
-# 		cat /etc/init.d/mcl &&\
-# 		chkconfig --add mcl &&\
-# 		chkconfig  mcl on
-
-ENTRYPOINT ["cd","/root/MCL","&&","./mcl"]
+ENTRYPOINT ["cd /root/MCL && ./mcl"]
