@@ -1,6 +1,6 @@
 FROM oraclelinux:8 as builder
 
-MAINTAINER greenhandzdl@gmail.com
+MAINTAINER greenhandzdl
 
 #https://github.com/oracle/docker-images
 RUN set -eux; \
@@ -43,7 +43,7 @@ RUN set -eux; \
 # DockerFile目录下需要包含机器人文件
 WORKDIR .
 VOLUME /root/MCL
-# 复制机器人信息，以免登录
+# 复制机器人信息，以免登录（本地构建方式）
 COPY bots /root/MCL/bots
 COPY plugins /root/MCL/plugins
 COPY config /root/MCL/config
