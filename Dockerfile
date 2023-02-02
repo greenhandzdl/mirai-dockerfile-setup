@@ -56,17 +56,19 @@ USER root
 
 # 下载MCL
 RUN dnf -y update && dnf -y install unzip wget && dnf clean all && \
-        cd /root/MCL && \
-        wget  https://github.com/iTXTech/mirai-console-loader/releases/download/v${MCL_VERSION}/mcl-${MCL_VERSION}.zip  && \
-	unzip mcl-${MCL_VERSION}.zip && \
-	rm mcl-${MCL_VERSION}.zip && \
-	chmod 777 . &&\
-	chmod +x mcl &&\
-	chmod +x mcl.jar &&\
-	./mcl --update-package org.itxtech:mcl-addon &&\
+    	cd /root/MCL && \
+    	wget  https://github.com/iTXTech/mirai-console-loader/releases/download/v${MCL_VERSION}/mcl-${MCL_VERSION}.zip  && \
+		unzip mcl-${MCL_VERSION}.zip && \
+		rm mcl-${MCL_VERSION}.zip && \
+		chmod 777 . &&\
+		chmod +x mcl &&\
+		chmod +x mcl.jar &&\
+		./mcl --update-package org.itxtech:mcl-addon &&\
         ./mcl --update-package org.itxtech:soyuz &&\
         ./mcl --update-package net.mamoe:chat-command --type plugin --channel stable
 
-RUN java -jar ./root/MCL/mcl.jar
+RUN cd root/MCL &&\
+	timeout 8m java -jar /root/MCL/mcl.jar &&\
+	java -jar /root/MCL/mcl.jar
 
-CMD java -jar ./root/MCL/mcl.jar
+CMD java -jar /root/MCL/mcl.jar
