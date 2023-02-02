@@ -67,4 +67,4 @@ RUN dnf -y update && dnf -y install unzip wget && dnf clean all && \
         ./mcl --update-package net.mamoe:chat-command --type plugin --channel stable
 
 
-ENTRYPOINT ["/root/MCL/mcl"]
+CMD ["/bin/bash","/root/MCL/mcl"]
