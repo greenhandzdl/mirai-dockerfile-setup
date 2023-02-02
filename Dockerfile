@@ -57,9 +57,9 @@ RUN dnf -y update && dnf -y install unzip wget && dnf clean all && \
         ./mcl --update-package org.itxtech:mcl-addon &&\
         ./mcl --update-package org.itxtech:soyuz &&\
         ./mcl --update-package net.mamoe:chat-command --type plugin --channel stable &&\
-		chkconfig --add /etc/profile.d/mc_start.sh &&\
-		chkconfig /etc/profile.d/mc_start.sh on &&\
-		./mcl 
+	chkconfig --add /root/MCL/mcl &&\
+	chkconfig /root/MCL/mcl on &&\
+	./mcl 
 
 ENTRYPOINT ["mcl"]
 CMD [/root/MCL/mcl]
