@@ -1,5 +1,7 @@
 FROM oraclelinux:8 as builder
 
+MAINTAINER greenhandzdl@gmail.com
+
 #https://github.com/oracle/docker-images
 RUN set -eux; \
 	dnf install -y tar; 
@@ -55,4 +57,9 @@ RUN dnf -y update && dnf -y install unzip wget && dnf clean all && \
         ./mcl --update-package org.itxtech:mcl-addon &&\
         ./mcl --update-package org.itxtech:soyuz &&\
         ./mcl --update-package net.mamoe:chat-command --type plugin --channel stable &&\
-	./mcl 
+		chkconfig --add /etc/profile.d/mc_start.sh &&\
+		chkconfig /etc/profile.d/mc_start.sh on &&\
+		./mcl 
+
+ENTRYPOINT ["mcl"]
+CMD [/root/MCL/mcl]
