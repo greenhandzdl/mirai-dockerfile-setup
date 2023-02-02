@@ -56,7 +56,6 @@ COPY data /root/MCL/data
 
 # 下载MCL
 RUN dnf -y update && dnf -y install unzip wget && dnf clean all && \
-		mkdir /root/MCL && \
     		cd /root/MCL && \
 		wget  https://github.com/iTXTech/mirai-console-loader/releases/download/v${MCL_VERSION}/mcl-${MCL_VERSION}.zip  && \
 		unzip mcl-${MCL_VERSION}.zip && \
