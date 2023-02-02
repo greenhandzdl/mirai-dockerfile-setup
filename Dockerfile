@@ -1,6 +1,6 @@
 FROM oraclelinux:8 as builder
 
-MAINTAINER greenhandzdl
+MAINTAINER greenhandzdl@gmail.com
 
 #https://github.com/oracle/docker-images
 RUN set -eux; \
@@ -40,30 +40,24 @@ RUN set -eux; \
 		alternatives --install "/usr/bin/$base" "$base" "$bin" 20000; \
 	done;
 
-# DockerFile目录下需要包含机器人文件
-WORKDIR .
-VOLUME /root/MCL
-# 复制机器人信息，以免登录（本地构建方式）
-COPY bots /root/MCL/bots
-COPY plugins /root/MCL/plugins
-COPY config /root/MCL/config
-COPY config.json /root/MCL/config.json
-COPY data /root/MCL/data
-
 ENV MCL_VERSION=2.1.2
 
 USER root
 
 # 下载MCL
 RUN dnf -y update && dnf -y install unzip wget && dnf clean all && \
-        cd /root/MCL && \
+		mkdir /root/MCL && \
+    	cd /root/MCL && \
         wget  https://github.com/iTXTech/mirai-console-loader/releases/download/v${MCL_VERSION}/mcl-${MCL_VERSION}.zip  && \
-	unzip mcl-${MCL_VERSION}.zip && \
-	rm mcl-${MCL_VERSION}.zip && \
-	chmod 777 . &&\
-	chmod +x mcl &&\
-	chmod +x mcl.jar &&\
-	./mcl --update-package org.itxtech:mcl-addon &&\
+		unzip mcl-${MCL_VERSION}.zip && \
+		rm mcl-${MCL_VERSION}.zip && \
+		wget 这里是你机器人配置文件的地址 &&\
+		unzip 解压缩的名字 &&\
+		rm mirai-docker.zip &&\
+		chmod 777 . &&\
+		chmod +x mcl &&\
+		chmod +x mcl.jar &&\
+		./mcl --update-package org.itxtech:mcl-addon &&\
         ./mcl --update-package org.itxtech:soyuz &&\
         ./mcl --update-package net.mamoe:chat-command --type plugin --channel stable
 

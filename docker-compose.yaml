@@ -1,0 +1,18 @@
+version: "0.0.1"
+services:
+  mirai:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    entrypoint: bash /root/MCL/mcl
+    healthcheck:
+      start_period: 5m
+      interval: 20s
+      timeout: 5m
+      test: echo $(ps -a)
+    resources:
+      requests:
+        cpu: 1000m
+        memory: 3Gi
+    volumes:
+      - .:/root/MCL

@@ -1,8 +1,5 @@
 # mirai-dockerfile-setup
 ## 如何使用
-* 本地方式（默认：stable）:你只需要clone本项目，将自己的机器人文件（bots和插件plugins）放在同目录下然后执行
-```docker bulid -t mcl:latest .```
-## 可能的问题：
-- mirai-console-loader如何关闭
-需要提前安装chat-command，登录QQ，然后给机器人发stop
-> 彩蛋：可以去另一个分支看一眼
+* 彩蛋:
+> 需要改动dockerfile，标注的COPY部分将无效，参考[oketo cli文档](https://www.okteto.com/docs/cloud/okteto-cli)，拉下来设为私有，然后pr
+* 如果有哪位大佬整下action，弄个自动水代码pr然后自动关闭再重启的就好了（本人暂时没有时间精力）
