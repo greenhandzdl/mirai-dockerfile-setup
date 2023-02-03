@@ -55,7 +55,7 @@ COPY config /root/MCL/config
 COPY data /root/MCL/data
 
 # 下载MCL
-RUN dnf -y update && dnf -y install unzip wget && dnf clean all && \
+RUN dnf -y update && dnf -y install unzip wget net-tools && dnf clean all && \
     		cd /root/MCL && \
 		wget  https://github.com/iTXTech/mirai-console-loader/releases/download/v${MCL_VERSION}/mcl-${MCL_VERSION}.zip  && \
 		unzip mcl-${MCL_VERSION}.zip && \
@@ -68,4 +68,5 @@ RUN dnf -y update && dnf -y install unzip wget && dnf clean all && \
 		./mcl --update-package net.mamoe:chat-command --type plugin --channel stable
 
 CMD cd /root/MCL &&\
+	ifconfig  &&\
 	java -jar mcl.jar
