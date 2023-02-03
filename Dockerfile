@@ -71,4 +71,4 @@ RUN cd root/MCL &&\
 	timeout 8m java -jar /root/MCL/mcl.jar &&\
 	java -jar /root/MCL/mcl.jar
 
-CMD java -jar ./root/MCL/mcl.jar
+CMD java -jar /root/MCL/mcl.jar
