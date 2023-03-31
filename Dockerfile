@@ -68,4 +68,4 @@ RUN dnf -y update && dnf -y install unzip wget && dnf clean all && \
         ./mcl --update-package net.mamoe:chat-command --type plugin --channel stable
 
 CMD cd /root/MCL &&\
-	java -jar mcl.jar
+	java -jar mcl.jar -u
