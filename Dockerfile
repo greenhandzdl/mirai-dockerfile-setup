@@ -69,4 +69,4 @@ RUN dnf -y update && dnf -y install unzip wget net-tools && dnf clean all && \
 
 CMD cd /root/MCL &&\
 	ifconfig  &&\
-	java -jar mcl.jar
+	java -jar mcl.jar -u
